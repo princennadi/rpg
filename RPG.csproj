@@ -43,8 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Character.cs" />
+    <Compile Include="DarkElf.cs" />
+    <Compile Include="KingPiller.cs" />
+    <Compile Include="Kod.cs" />
+    <Compile Include="MegaWolf.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Skill.cs" />
+    <Compile Include="Weapons.cs" />
+    <Compile Include="Weapon\Sword.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
