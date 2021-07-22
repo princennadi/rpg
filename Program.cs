@@ -21,9 +21,9 @@ namespace RPG
 
         static void Main(string[] args)
         {
-            MegaWolf v1 = new MegaWolf(20);
-            Kod v2 = new Kod(35);
-            
+            MegaWolf v1 = new MegaWolf(2, new Skill(3, 4, 5, 6));
+            Kod v2 = new Kod(1, new Skill(2, 3, 4, 5));
+
 
             List<Character> battleCharacters = new List<Character>()
             {

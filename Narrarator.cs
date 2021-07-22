@@ -7,7 +7,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-   public class Narrarator
+    public enum AttackActions
+    {
+        Active,
+        Passive,
+        Miss,
+        SelfDamage,
+    }
+    public class Narrarator
     {
         private Character hero;
         public Character Hero { get { return hero; } }
@@ -88,11 +95,11 @@ namespace ConsoleApp1
             Console.WriteLine("Type in the title");
             string storyName = Console.ReadLine();
             Console.WriteLine("How many quests do you want?");
+            int questNum = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("type in the intro");
             string start = Console.ReadLine();
             Console.WriteLine("type in the outro");
-            string end = Console.ReadLine();
-            int questNum = Convert.ToInt32(Console.ReadLine());
+            string end = Console.ReadLine();       
             List<Quests.QuestBase> quests = new List<Quests.QuestBase>();
             for (int i = questNum; i < questNum; i++)
             {
@@ -132,5 +139,154 @@ namespace ConsoleApp1
             string sceneName = Console.ReadLine();
             return new Scenery.Forest(sceneName, story);
         }
+        static Character Battle(IEnumerable<Character> fighter)
+        {
+            Character winner = null;
+            IEnumerable<Character> combatant = fighter;
+            Random rand = new Random();
+            if (combatant.Count() < 2)
+            {
+                return null;
+            }
+            else
+            {
+                while (true)
+                {
+
+                    Character temporary = Dice(combatant.ToArray());
+                    Console.WriteLine(temporary.ToString() + " is attacking");
+                    string command = "";
+                    Console.WriteLine("What attack do you want to do?" + " HINT: enter magic or physical");
+                    command = Console.ReadLine();
+                    AttackActions actions;
+                    AttackType type = AttackType.physical;
+                    if (command == "magic")
+                    {
+                        actions = Dice(rand);
+                        type = AttackType.magic;
+                    }
+                    else if (command == "physical")
+                    {
+                        actions = Dice(rand);
+                        type = AttackType.physical;
+                    }
+                    else
+                    {
+                        combatant = combatant.Where(x => x != temporary);
+                        Console.WriteLine(temporary.ToString() + " ran away.");
+                        continue;
+                    }
+
+
+                    int AttackerIndex = combatant.ToList().FindIndex(temp => temporary == temp);
+                    int damage = combatant.ToList()[AttackerIndex].Attack(AttackAction.passive, type);
+                    if (actions == AttackActions.Active)
+                    {
+                        damage = combatant.ToList()[AttackerIndex].Attack(AttackAction.active, type);
+                    }
+                    else if (actions == AttackActions.Passive)
+                    {
+                        damage = combatant.ToList()[AttackerIndex].Attack(AttackAction.passive, type);
+                    }
+                    else if (actions == AttackActions.SelfDamage)
+                    {
+                        damage = combatant.ToList()[AttackerIndex].Attack(AttackAction.passive, type);
+                        combatant.ToList()[AttackerIndex].Damage(damage);
+                        Console.WriteLine(combatant.ToList()[AttackerIndex].ToString() + "Self damaged by" + damage + "hit points");
+                        continue;
+                    }
+                    else if (actions == AttackActions.Miss)
+                    {
+                        Console.WriteLine(combatant.ToList()[AttackerIndex].ToString() + " missed.");
+                        combatant.ToList()[AttackerIndex].MissAttack();
+                        continue;
+                    }
+
+                    Console.WriteLine(temporary.ToString() + " has dealt " + +damage + " damage");
+                    for (int i = 0; i < combatant.Count(); i++)
+                    {
+
+                        if (i != AttackerIndex)
+                        {
+                            if (combatant.ToList()[i].getHealth > 0)
+                            {
+                                combatant.ToList()[i].Damage(damage);
+                                Console.WriteLine(combatant.ToList()[i].ToString() + " recieved " + damage + " damage from " + temporary.ToString());
+                            }
+
+                        }
+
+
+
+
+                    }
+
+
+                    int count = combatant.Count(p => p.getHealth > 0);
+
+                    if (count == 1)
+                    {
+                        winner = combatant.First(p => p.getHealth > 0);
+                        break;
+                    }
+                    else if (count == 0)
+                    {
+                        break;
+                    }
+
+
+                }
+                return winner;
+
+            }
+        }
+
+        static Character Dice(params Character[] a)
+        {
+
+            List<Character> dexx = new List<Character>(a);
+            dexx.Sort(DexterityComparer);
+            return dexx.Last();
+        }
+
+        public static AttackActions Dice(Random rand)
+        {
+            int randomNumber = rand.Next(1, 4);
+
+            if (randomNumber == 1)
+            {
+                return AttackActions.Active;
+            }
+            else if (randomNumber == 2)
+            {
+                return AttackActions.Passive;
+            }
+            else if (randomNumber == 3)
+            {
+                return AttackActions.Miss;
+            }
+            else
+            {
+                return AttackActions.SelfDamage;
+            }
+        }
+        static int DexterityComparer(Character aa, Character ab)
+        {
+            if (aa.getSkill.getDexterity > ab.getSkill.getDexterity)
+            {
+                return 1;
+            }
+            else if (aa.getSkill.getDexterity < ab.getSkill.getDexterity)
+            {
+                return -1;
+            }
+            else
+            {
+                return 0;
+            }
+
+
+        }
     }
-} 
+}
+
