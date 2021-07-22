@@ -9,9 +9,10 @@ namespace ConsoleApp1
 {
     public class MegaWolf : Character
     {
-        public MegaWolf(int level) : base("Mega Wolf", level, 132, 500, new Skill(4, 20, 9, 2))
+        public MegaWolf(int level, Skill skill, int maxHealth = 500) : base("Mega Wolf", "male" ,level, 132, 500, skill)
         {
             equipWeapon = new Sword(20);
+            equipMagic = new Magic("wind", 30, 5);
         }
     }
 }

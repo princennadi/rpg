@@ -9,9 +9,10 @@ namespace ConsoleApp1
 {
     public class DarkElf: Character
     {
-        public DarkElf(int level) : base("Dark Elf", level, 560, 300, new Skill(15, 4, 2, 7))
+        public DarkElf(int level, Skill skill, int maxHealth = 300) : base("Dark Elf", "female", level, 560, 300, skill)
         {
             equipWeapon = new Sword(20);
+            equipMagic = new Magic("earth", 50, 5);
         }
     }
 }

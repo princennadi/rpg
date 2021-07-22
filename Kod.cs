@@ -9,9 +9,10 @@ namespace ConsoleApp1
 {
     public class Kod : Character
     {
-        public Kod(int level) : base("Kod", level, 10000, 780, new Skill(11, 30, 15, 12))
+        public Kod(int level, Skill skill, int maxHealth = 780) : base("Kod", "male",level, 10000, maxHealth, skill)
         {
             equipWeapon = new Sword(20);
+            equipMagic = new Magic("wind", 30, 5);
         }
     }
 }

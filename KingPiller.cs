@@ -9,9 +9,10 @@ namespace ConsoleApp1
 {
     public class KingPiller : Character
     {
-        public KingPiller(int level) : base("King Piller", level, 1000, 550, new Skill(8, 6, 25, 10))
+        public KingPiller(int level, Skill skill, int maxHealth = 550) : base("King Piller", "male" ,level, 1000, 550, skill)
         {
             equipWeapon = new Sword(20);
+            equipMagic = new Magic("wind", 30, 5);
         }
     }
 }

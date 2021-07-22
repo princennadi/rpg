@@ -6,7 +6,30 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    class Magic
+    public class Magic
     {
+        private string name;
+        private int totalMana;
+        private int manaUsed;
+
+        public Magic(string name, int totalMana, int manaUsed)
+        {
+            this.name = name;
+            this.totalMana = totalMana;
+            this.manaUsed = manaUsed;
+
+
+        }
+
+        public virtual int passiveMagic()
+        {
+            return 0;
+        }
+
+        public virtual int activeMagic()
+        {
+            return 1;
+        }
+
     }
 }

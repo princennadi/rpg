@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Weapon
 {
-   public class Sword : Weapons
+   public class Stone : Weapons
     {
-        public Sword(int damage = 10): base("Sword", 0.80, damage)
+        public Stone(int damage = 5) : base("Stone", 0.80, damage)
         {
 
         }

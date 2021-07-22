@@ -21,25 +21,31 @@ namespace ConsoleApp1
     public abstract class Character
     {
         private string name;
+        private string gender;
         private int level;
         private int age;
         private long maxHealth;
         private long life;
         private int sp;
-        private int mp;
+        private int magicPoints;
+        private int magicNeeded;
         private Skill skill;
         public string title { get; set; }
         public Weapons equipWeapon { get; set; }
+        public Magic equipMagic { get; set; }
+        public long getHealth { get { return life; } }
 
-        public Character(string name, int level, int age, long maxHealth, Skill skill)
+        public Character(string name, string gender, int level, int age, long maxHealth, Skill skill)
         {
             this.name = name;
+            this.gender = gender;
             this.level = level;
             this.age = age;
             this.life = maxHealth;
             this.maxHealth = maxHealth;
             this.sp = 5;
-            this.mp = 5;
+            this.magicPoints = 10;
+            this.magicNeeded = 5;
             this.skill = skill; 
         }
 
@@ -64,22 +70,49 @@ namespace ConsoleApp1
             }
         }
 
-        public int Attack(AttackAction action)
+        public int Attack(AttackAction action, AttackType type)
         {
             this.skill.loseSpeed(2);            
             int damage = 0;
-            if (equipWeapon != null) 
+            if (type == AttackType.physical)
             {
-              
-               if (action == AttackAction.passive)
+                if (equipWeapon != null)
                 {
-                     damage = equipWeapon.passiveDamage();
-                }   
-               else if (action == AttackAction.active)
-                {
-                     damage = equipWeapon.activeDamage();
+
+                    if (action == AttackAction.passive)
+                    {
+                        damage = equipWeapon.passiveDamage();
+                    }
+                    else if (action == AttackAction.active)
+                    {
+                        damage = equipWeapon.activeDamage();
+                    }
+                    
                 }
-                damage += getSkill.getAttack;
+                
+            }
+            else if (type == AttackType.magic)
+            {
+                if (magicPoints >= 0)
+                {
+                    if (action == AttackAction.passive)
+                    {
+                        damage = equipMagic.passiveMagic();
+                        magicPoints = magicPoints - 3;
+                    }
+                    else if (action == AttackAction.active)
+                    {
+                        damage = equipMagic.activeMagic();
+                        magicPoints = magicPoints - 5; 
+                    }
+                    damage += getSkill.getAttack;
+                }
+                else
+                {
+                    damage = 0;
+                    return damage;
+                }
+                
             }
             return damage;
         }
@@ -104,6 +137,16 @@ namespace ConsoleApp1
 
 
 
+        }
+
+        public void MissAttack()
+        {
+            this.skill.loseSpeed(2);
+        }
+
+        public override string ToString()
+        {
+            return name;
         }
 
     }
