@@ -35,6 +35,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -46,12 +48,19 @@
     <Compile Include="Character.cs" />
     <Compile Include="DarkElf.cs" />
     <Compile Include="ElfH.cs" />
+    <Compile Include="Fodder\Tree.cs" />
     <Compile Include="GodH.cs" />
     <Compile Include="KingPiller.cs" />
     <Compile Include="Kod.cs" />
     <Compile Include="Magic.cs" />
     <Compile Include="MegaWolf.cs" />
     <Compile Include="Narrarator.cs" />
+    <Compile Include="NarraratorForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="NarraratorForm.Designer.cs">
+      <DependentUpon>NarraratorForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="OgreH.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,6 +74,7 @@
     <Compile Include="Weapons.cs" />
     <Compile Include="Weapon\Bow.cs" />
     <Compile Include="Weapon\Excalibur.cs" />
+    <Compile Include="Weapon\LoserWeapon.cs" />
     <Compile Include="Weapon\Stick.cs" />
     <Compile Include="Weapon\Stone.cs" />
     <Compile Include="Weapon\Sword.cs" />
@@ -72,6 +82,10 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="NarraratorForm.resx">
+      <DependentUpon>NarraratorForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

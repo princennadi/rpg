@@ -34,6 +34,7 @@ namespace ConsoleApp1
         public Weapons equipWeapon { get; set; }
         public Magic equipMagic { get; set; }
         public long getHealth { get { return life; } }
+        public int Level { get { return level; } }
 
         public Character(string name, string gender, int level, int age, long maxHealth, Skill skill)
         {
@@ -93,7 +94,7 @@ namespace ConsoleApp1
             }
             else if (type == AttackType.magic)
             {
-                if (magicPoints >= 0)
+                if (magicPoints >= 0 && equipMagic != null)
                 {
                     if (action == AttackAction.passive)
                     {

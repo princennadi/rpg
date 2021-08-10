@@ -16,6 +16,7 @@ namespace ConsoleApp1.Scenery
         public string Name  { get { return name; } }
         public List<Weapons> AvailableWeapons { get { return availableWeapons; } }
         public List<Weapons> Weapons2 { get { return weapons; } }
+        public StoryBase Story { get { return story; } }
 
 
         public SceneryBase (string name, List<Weapons> availableWeapons, StoryBase story, List<Weapons> weapons)

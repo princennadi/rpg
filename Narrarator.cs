@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Scenery;
+﻿using ConsoleApp1.Fodder;
+using ConsoleApp1.Scenery;
+using ConsoleApp1.Weapon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,8 +19,38 @@ namespace ConsoleApp1
     public class Narrarator
     {
         private Character hero;
-        public Character Hero { get { return hero; } }
-        
+        private IList<Character> enemy;
+        private List<Weapons> weaponBag = new List<Weapons>();
+        public Character Hero
+        {
+            get { return hero; }
+            set { hero = value; }
+        }
+        public SceneryBase Scenery { get; set; } = null;
+        public Quests.QuestBase Quest { get; set; } = null;
+        public bool StoryEnded {get; set;} = true;
+        public bool QuestEnded { get; set; } = true;
+        public int Progress { get; set; } = 0;
+
+        public void createHero(string name, string gender, int age, string heroType)
+        {
+            if (heroType == "ogre")
+            {
+                hero = new OgreH(name, gender, age);
+            }
+            else if (heroType == "sorcerer")
+            {
+                hero = new SorcererH(name, gender, age);
+            }
+            else if (heroType == "ogre")
+            {
+                hero = new ElfH(name, gender, age);
+            }
+            else if (heroType == "God")
+            {
+                hero = new GodH("prince", "omnipotent", 9000);
+            }
+        }
 
         public void createHero()
         {
@@ -51,7 +83,252 @@ namespace ConsoleApp1
             
 
         }
+        public Weapons createWeapon(string type, int? damage)
+        {
+            if (type == "Sword")
+            {
+                if (damage.HasValue)
+                {
+                    return new Sword(damage.Value);
+                }
+                else
+                {
+                    return new Sword();
+                }
+            }
+            else if (type == "Bow")
+            {
+                if (damage.HasValue)
+                {
+                    return new Bow(damage.Value);
+                }
+                else
+                {
+                    return new Bow();
+                }
+            }
+            else if (type == "Stick")
+            {
+                if (damage.HasValue)
+                {
+                    return new Stick(damage.Value);
+                }
+                else
+                {
+                    return new Stick();
+                }
+            }
+            else if (type == "Stone")
+            {
+                if (damage.HasValue)
+                {
+                    return new Stone(damage.Value);
+                }
+                else
+                {
+                    return new Stone();
+                }
+            }
+            else if (type == "cheaters win")
+            {
+                if (damage.HasValue)
+                {
+                    return new Excalibur(damage.Value);
+                }
+                else
+                {
+                    return new Excalibur();
+                }
+            }
+            else
+            {
+                if (damage.HasValue)
+                {
+                    return new LoserWeapon(damage.Value);
+                }
+                else
+                {
+                    return new LoserWeapon();
+                }
+            }
 
+        }
+
+        public Character createVillian(int lev, int dex, int smarts, int hits, int magical, int maxLife, string vil)
+        {
+            if (vil == "Kod")
+            {
+                return new Kod(lev, new Skill(smarts, hits, dex, magical), maxLife);
+            }
+            else if (vil == "Mega Wolf")
+            {
+                return new MegaWolf(lev, new Skill(smarts, hits, dex, magical), maxLife);
+            }
+            else if (vil == "King Piller")
+            {
+                return new KingPiller(lev, new Skill(smarts, hits, dex, magical), maxLife);
+            }
+            else if (vil == "Dark Elf")
+            {
+                return new DarkElf(lev, new Skill(smarts, hits, dex, magical), maxLife);
+            }
+            else
+            {
+                return null;
+            }
+        }
+        public Quests.QuestBase newQuest(string title, string challenge, int targets, Character enemy = null)
+        {
+            return new Quests.QuestBase(title, challenge, targets, enemy);
+        }
+
+        public Stories.StoryBase newStory(string name, List<Quests.QuestBase> quests, string introduction, string conclusion)
+        {
+            return new Stories.StoryBase(name, quests, introduction, conclusion);
+        }
+
+        public Scenery.SceneryBase newScene(string scenename, Stories.StoryBase story, string sceneType)
+        {
+            if (sceneType == "forest")
+            {
+                return new Scenery.Forest(scenename, story);
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public string GoToScene(SceneryBase scenery)
+        {
+            Scenery = scenery;
+            StoryEnded = false;
+            return scenery.Story.Introduction;
+        }
+
+        public string NextQuest()
+        {
+           
+            if (Scenery != null)
+            {
+                Quests.QuestBase current = Scenery.Story.Challenge.FirstOrDefault(x => x != Quest);
+
+                if (current != null)
+                {
+                    Quest = current;
+                    QuestEnded = false;
+                    Progress = 0;
+                    return Quest.Title + " : " + Quest.Challenge;
+                }
+                return null;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+            
+           
+        }
+        public void UpdateQuest(int progress)
+        {
+            Progress = progress;
+            if (Progress >= Quest.Target)
+            {
+                QuestEnded = true;
+                
+            }
+        }
+        public Weapons GetSceneWeapon()
+        {
+            Random rand = new Random();
+            int index = rand.Next(0, 2 * Scenery.Weapons2.Count);
+            if (index<Scenery.Weapons2.Count)
+            {
+                return Scenery.Weapons2[index];
+            }
+            return null;
+        }
+
+        public void move()
+        {
+            Random moveDice = new Random();
+            int result = moveDice.Next(2);
+            if (result == 0)
+            {
+                //TODO: NOtify about drop
+                weaponBag.Add(GetSceneWeapon());
+            }
+            else
+            {
+                enemy = generateEnemy();
+            }
+        }
+
+        public IList<Character> generateEnemy()
+        {
+            IList<Character> enemies = new List<Character>();
+            int level = hero.Level;
+            Random spawner = new Random();
+            switch (level)
+            {
+
+                case 1:
+                case 2:
+                case 3:
+                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                    break;
+                case 4:
+                case 5:
+                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                    enemies.Add(new Tree());
+                    break;
+                default:
+                    for (int i = 0; i < Convert.ToInt32(Math.Round(level * 0.5)); i++)
+                    {
+                        enemies.Add(new Tree());
+                    }
+                    break;
+
+            }
+
+            if (level >= 6)
+            {
+                int count = Convert.ToInt32(Math.Ceiling(level / 2.0));
+                for (int i = 0; i < count; i++)
+                {
+                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                }
+            }
+            return enemies;
+        }
+
+        public Character spawnEnemy(int type, int lev)
+        {
+            switch (type)
+            {
+                case 1:
+                    return new Kod(lev / 2, new Skill(100, 25, 10, 50));
+                case 2:
+                    return new MegaWolf(lev / 2, new Skill(20, 100, 50, 25));
+                case 3:
+                    return new DarkElf(lev / 2, new Skill(100, 35, 12, 70));
+                default:
+                    return new Kod(lev / 2, new Skill(100, 25, 10, 50));
+            }
+        }
+        public string EndStory()
+        {
+            if (Scenery != null)
+            {
+                StoryEnded = true;
+                return Scenery.Story.Conclusion;
+            }
+            else
+            {
+                throw new ArgumentException();
+            }
+        }
+       
         public Character createVillian()
         {
             Console.WriteLine("What level is the villian?");
@@ -139,6 +416,24 @@ namespace ConsoleApp1
             string sceneName = Console.ReadLine();
             return new Scenery.Forest(sceneName, story);
         }
+
+        public int Attack(AttackAction actions, AttackType type, Character character)
+        {
+            Random rand = new Random();
+            //AttackAction action = Dice(rand);
+            int damage = 0;
+
+            if (actions == AttackAction.active)
+            {
+                damage = character.Attack(AttackAction.active, type);
+            }
+            else if (actions == AttackAction.passive)
+            {
+                damage = character.Attack(AttackAction.passive, type);
+            }
+            return damage;
+        }
+
         static Character Battle(IEnumerable<Character> fighter)
         {
             Character winner = null;
@@ -154,9 +449,7 @@ namespace ConsoleApp1
                 {
 
                     Character temporary = Dice(combatant.ToArray());
-                    Console.WriteLine(temporary.ToString() + " is attacking");
                     string command = "";
-                    Console.WriteLine("What attack do you want to do?" + " HINT: enter magic or physical");
                     command = Console.ReadLine();
                     AttackActions actions;
                     AttackType type = AttackType.physical;
@@ -173,7 +466,6 @@ namespace ConsoleApp1
                     else
                     {
                         combatant = combatant.Where(x => x != temporary);
-                        Console.WriteLine(temporary.ToString() + " ran away.");
                         continue;
                     }
 
@@ -192,17 +484,14 @@ namespace ConsoleApp1
                     {
                         damage = combatant.ToList()[AttackerIndex].Attack(AttackAction.passive, type);
                         combatant.ToList()[AttackerIndex].Damage(damage);
-                        Console.WriteLine(combatant.ToList()[AttackerIndex].ToString() + "Self damaged by" + damage + "hit points");
                         continue;
                     }
                     else if (actions == AttackActions.Miss)
                     {
-                        Console.WriteLine(combatant.ToList()[AttackerIndex].ToString() + " missed.");
                         combatant.ToList()[AttackerIndex].MissAttack();
                         continue;
                     }
 
-                    Console.WriteLine(temporary.ToString() + " has dealt " + +damage + " damage");
                     for (int i = 0; i < combatant.Count(); i++)
                     {
 
@@ -211,7 +500,6 @@ namespace ConsoleApp1
                             if (combatant.ToList()[i].getHealth > 0)
                             {
                                 combatant.ToList()[i].Damage(damage);
-                                Console.WriteLine(combatant.ToList()[i].ToString() + " recieved " + damage + " damage from " + temporary.ToString());
                             }
 
                         }
@@ -239,6 +527,12 @@ namespace ConsoleApp1
                 return winner;
 
             }
+
+            
+        }
+        static void increaseHero(int health)
+        {
+
         }
 
         static Character Dice(params Character[] a)
