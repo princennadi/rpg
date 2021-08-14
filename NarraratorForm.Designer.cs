@@ -37,41 +37,44 @@ namespace ConsoleApp1
             this.characterLabel = new System.Windows.Forms.Label();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.CreateWeapon = new System.Windows.Forms.TabPage();
+            this.createaweaponButton = new System.Windows.Forms.Button();
+            this.damagePickerLabel = new System.Windows.Forms.Label();
+            this.damagePicker = new System.Windows.Forms.NumericUpDown();
+            this.pickWeaponType = new System.Windows.Forms.ComboBox();
             this.CreateVillian = new System.Windows.Forms.TabPage();
             this.createVillianButton = new System.Windows.Forms.Button();
-            this.textBox6 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.Label();
+            this.NameBox = new System.Windows.Forms.TextBox();
+            this.MagicBox = new System.Windows.Forms.TextBox();
+            this.MaxLifeBox = new System.Windows.Forms.TextBox();
+            this.StrengthBox = new System.Windows.Forms.TextBox();
+            this.InteligenceBox = new System.Windows.Forms.TextBox();
+            this.DexterityBox = new System.Windows.Forms.TextBox();
+            this.level = new System.Windows.Forms.Label();
             this.maxLife = new System.Windows.Forms.Label();
             this.magic = new System.Windows.Forms.Label();
             this.strength = new System.Windows.Forms.Label();
             this.inteligence = new System.Windows.Forms.Label();
             this.dexterity = new System.Windows.Forms.Label();
             this.CreateScene = new System.Windows.Forms.TabPage();
-            this.pickWeaponType = new System.Windows.Forms.ComboBox();
-            this.damagePicker = new System.Windows.Forms.NumericUpDown();
-            this.damagePickerLabel = new System.Windows.Forms.Label();
-            this.createaweaponButton = new System.Windows.Forms.Button();
-            this.QuestsBox = new System.Windows.Forms.GroupBox();
-            this.TitleBox = new System.Windows.Forms.TextBox();
-            this.ChallengeBox = new System.Windows.Forms.TextBox();
-            this.VillianBox = new System.Windows.Forms.ComboBox();
-            this.TargetBox = new System.Windows.Forms.NumericUpDown();
-            this.addQuest = new System.Windows.Forms.Button();
-            this.StoryTitle = new System.Windows.Forms.TextBox();
-            this.StoryIntro = new System.Windows.Forms.RichTextBox();
-            this.StoryConclusion = new System.Windows.Forms.RichTextBox();
-            this.ChooseScene = new System.Windows.Forms.ComboBox();
             this.CreateScene_btn = new System.Windows.Forms.Button();
+            this.ChooseScene = new System.Windows.Forms.ComboBox();
+            this.StoryConclusion = new System.Windows.Forms.RichTextBox();
+            this.StoryIntro = new System.Windows.Forms.RichTextBox();
+            this.StoryTitle = new System.Windows.Forms.TextBox();
+            this.QuestsBox = new System.Windows.Forms.GroupBox();
+            this.addQuest = new System.Windows.Forms.Button();
+            this.TargetBox = new System.Windows.Forms.NumericUpDown();
+            this.VillianBox = new System.Windows.Forms.ComboBox();
+            this.ChallengeBox = new System.Windows.Forms.TextBox();
+            this.TitleBox = new System.Windows.Forms.TextBox();
+            this.SceneName = new System.Windows.Forms.TextBox();
+            this.LevelBox = new System.Windows.Forms.TextBox();
+            this.name = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.CreateWeapon.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.damagePicker)).BeginInit();
             this.CreateVillian.SuspendLayout();
             this.CreateScene.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.damagePicker)).BeginInit();
             this.QuestsBox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetBox)).BeginInit();
             this.SuspendLayout();
@@ -161,17 +164,59 @@ namespace ConsoleApp1
             this.CreateWeapon.TabIndex = 0;
             this.CreateWeapon.Text = "Create Weapon";
             // 
+            // createaweaponButton
+            // 
+            this.createaweaponButton.Location = new System.Drawing.Point(150, 153);
+            this.createaweaponButton.Name = "createaweaponButton";
+            this.createaweaponButton.Size = new System.Drawing.Size(176, 77);
+            this.createaweaponButton.TabIndex = 3;
+            this.createaweaponButton.Text = "Click to Create";
+            this.createaweaponButton.UseVisualStyleBackColor = true;
+            this.createaweaponButton.Click += new System.EventHandler(this.createaweaponButton_Click);
+            // 
+            // damagePickerLabel
+            // 
+            this.damagePickerLabel.AutoSize = true;
+            this.damagePickerLabel.Location = new System.Drawing.Point(213, 65);
+            this.damagePickerLabel.Name = "damagePickerLabel";
+            this.damagePickerLabel.Size = new System.Drawing.Size(86, 13);
+            this.damagePickerLabel.TabIndex = 2;
+            this.damagePickerLabel.Text = "Choose Damage";
+            // 
+            // damagePicker
+            // 
+            this.damagePicker.Location = new System.Drawing.Point(203, 89);
+            this.damagePicker.Name = "damagePicker";
+            this.damagePicker.Size = new System.Drawing.Size(210, 20);
+            this.damagePicker.TabIndex = 1;
+            // 
+            // pickWeaponType
+            // 
+            this.pickWeaponType.FormattingEnabled = true;
+            this.pickWeaponType.Items.AddRange(new object[] {
+            "Sword",
+            "Bow",
+            "Stick",
+            "Stone"});
+            this.pickWeaponType.Location = new System.Drawing.Point(30, 88);
+            this.pickWeaponType.Name = "pickWeaponType";
+            this.pickWeaponType.Size = new System.Drawing.Size(135, 21);
+            this.pickWeaponType.TabIndex = 0;
+            this.pickWeaponType.Text = "Pick a Weapon";
+            // 
             // CreateVillian
             // 
             this.CreateVillian.BackColor = System.Drawing.Color.WhiteSmoke;
             this.CreateVillian.Controls.Add(this.createVillianButton);
-            this.CreateVillian.Controls.Add(this.textBox6);
-            this.CreateVillian.Controls.Add(this.textBox5);
-            this.CreateVillian.Controls.Add(this.textBox4);
-            this.CreateVillian.Controls.Add(this.textBox3);
-            this.CreateVillian.Controls.Add(this.textBox2);
-            this.CreateVillian.Controls.Add(this.textBox1);
+            this.CreateVillian.Controls.Add(this.NameBox);
+            this.CreateVillian.Controls.Add(this.MagicBox);
+            this.CreateVillian.Controls.Add(this.LevelBox);
+            this.CreateVillian.Controls.Add(this.MaxLifeBox);
+            this.CreateVillian.Controls.Add(this.StrengthBox);
+            this.CreateVillian.Controls.Add(this.InteligenceBox);
+            this.CreateVillian.Controls.Add(this.DexterityBox);
             this.CreateVillian.Controls.Add(this.name);
+            this.CreateVillian.Controls.Add(this.level);
             this.CreateVillian.Controls.Add(this.maxLife);
             this.CreateVillian.Controls.Add(this.magic);
             this.CreateVillian.Controls.Add(this.strength);
@@ -192,57 +237,58 @@ namespace ConsoleApp1
             this.createVillianButton.TabIndex = 9;
             this.createVillianButton.Text = "Create Villian";
             this.createVillianButton.UseVisualStyleBackColor = true;
+            this.createVillianButton.Click += new System.EventHandler(this.createVillianButton_Click);
             // 
-            // textBox6
+            // NameBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(415, 130);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(149, 20);
-            this.textBox6.TabIndex = 8;
+            this.NameBox.Location = new System.Drawing.Point(415, 130);
+            this.NameBox.Name = "NameBox";
+            this.NameBox.Size = new System.Drawing.Size(149, 20);
+            this.NameBox.TabIndex = 8;
             // 
-            // textBox5
+            // MagicBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(336, 73);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(149, 20);
-            this.textBox5.TabIndex = 7;
+            this.MagicBox.Location = new System.Drawing.Point(336, 73);
+            this.MagicBox.Name = "MagicBox";
+            this.MagicBox.Size = new System.Drawing.Size(149, 20);
+            this.MagicBox.TabIndex = 7;
             // 
-            // textBox4
+            // MaxLifeBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(107, 130);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(149, 20);
-            this.textBox4.TabIndex = 7;
+            this.MaxLifeBox.Location = new System.Drawing.Point(107, 130);
+            this.MaxLifeBox.Name = "MaxLifeBox";
+            this.MaxLifeBox.Size = new System.Drawing.Size(149, 20);
+            this.MaxLifeBox.TabIndex = 7;
             // 
-            // textBox3
+            // StrengthBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(181, 73);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(149, 20);
-            this.textBox3.TabIndex = 7;
+            this.StrengthBox.Location = new System.Drawing.Point(181, 73);
+            this.StrengthBox.Name = "StrengthBox";
+            this.StrengthBox.Size = new System.Drawing.Size(149, 20);
+            this.StrengthBox.TabIndex = 7;
             // 
-            // textBox2
+            // InteligenceBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(491, 73);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(149, 20);
-            this.textBox2.TabIndex = 7;
+            this.InteligenceBox.Location = new System.Drawing.Point(491, 73);
+            this.InteligenceBox.Name = "InteligenceBox";
+            this.InteligenceBox.Size = new System.Drawing.Size(149, 20);
+            this.InteligenceBox.TabIndex = 7;
             // 
-            // textBox1
+            // DexterityBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(26, 73);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(149, 20);
-            this.textBox1.TabIndex = 7;
+            this.DexterityBox.Location = new System.Drawing.Point(26, 73);
+            this.DexterityBox.Name = "DexterityBox";
+            this.DexterityBox.Size = new System.Drawing.Size(149, 20);
+            this.DexterityBox.TabIndex = 7;
             // 
-            // name
+            // level
             // 
-            this.name.AutoSize = true;
-            this.name.Location = new System.Drawing.Point(471, 114);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(33, 13);
-            this.name.TabIndex = 5;
-            this.name.Text = "name";
+            this.level.AutoSize = true;
+            this.level.Location = new System.Drawing.Point(321, 214);
+            this.level.Name = "level";
+            this.level.Size = new System.Drawing.Size(29, 13);
+            this.level.TabIndex = 5;
+            this.level.Text = "level";
             // 
             // maxLife
             // 
@@ -296,6 +342,7 @@ namespace ConsoleApp1
             this.CreateScene.Controls.Add(this.ChooseScene);
             this.CreateScene.Controls.Add(this.StoryConclusion);
             this.CreateScene.Controls.Add(this.StoryIntro);
+            this.CreateScene.Controls.Add(this.SceneName);
             this.CreateScene.Controls.Add(this.StoryTitle);
             this.CreateScene.Controls.Add(this.QuestsBox);
             this.CreateScene.Location = new System.Drawing.Point(4, 22);
@@ -304,45 +351,49 @@ namespace ConsoleApp1
             this.CreateScene.TabIndex = 2;
             this.CreateScene.Text = "Create Scene";
             // 
-            // pickWeaponType
+            // CreateScene_btn
             // 
-            this.pickWeaponType.FormattingEnabled = true;
-            this.pickWeaponType.Items.AddRange(new object[] {
-            "Sword",
-            "Bow",
-            "Stick",
-            "Stone"});
-            this.pickWeaponType.Location = new System.Drawing.Point(30, 88);
-            this.pickWeaponType.Name = "pickWeaponType";
-            this.pickWeaponType.Size = new System.Drawing.Size(135, 21);
-            this.pickWeaponType.TabIndex = 0;
-            this.pickWeaponType.Text = "Pick a Weapon";
+            this.CreateScene_btn.Location = new System.Drawing.Point(69, 321);
+            this.CreateScene_btn.Name = "CreateScene_btn";
+            this.CreateScene_btn.Size = new System.Drawing.Size(77, 35);
+            this.CreateScene_btn.TabIndex = 4;
+            this.CreateScene_btn.Text = "Create Scene";
+            this.CreateScene_btn.UseVisualStyleBackColor = true;
+            this.CreateScene_btn.Click += new System.EventHandler(this.CreateScene_btn_Click);
             // 
-            // damagePicker
+            // ChooseScene
             // 
-            this.damagePicker.Location = new System.Drawing.Point(203, 89);
-            this.damagePicker.Name = "damagePicker";
-            this.damagePicker.Size = new System.Drawing.Size(210, 20);
-            this.damagePicker.TabIndex = 1;
+            this.ChooseScene.FormattingEnabled = true;
+            this.ChooseScene.Location = new System.Drawing.Point(41, 281);
+            this.ChooseScene.Name = "ChooseScene";
+            this.ChooseScene.Size = new System.Drawing.Size(140, 21);
+            this.ChooseScene.TabIndex = 3;
+            this.ChooseScene.Text = "Pick a Scene";
             // 
-            // damagePickerLabel
+            // StoryConclusion
             // 
-            this.damagePickerLabel.AutoSize = true;
-            this.damagePickerLabel.Location = new System.Drawing.Point(213, 65);
-            this.damagePickerLabel.Name = "damagePickerLabel";
-            this.damagePickerLabel.Size = new System.Drawing.Size(86, 13);
-            this.damagePickerLabel.TabIndex = 2;
-            this.damagePickerLabel.Text = "Choose Damage";
+            this.StoryConclusion.Location = new System.Drawing.Point(41, 248);
+            this.StoryConclusion.Name = "StoryConclusion";
+            this.StoryConclusion.Size = new System.Drawing.Size(141, 27);
+            this.StoryConclusion.TabIndex = 2;
+            this.StoryConclusion.Text = "Story Conclusion";
             // 
-            // createaweaponButton
+            // StoryIntro
             // 
-            this.createaweaponButton.Location = new System.Drawing.Point(150, 153);
-            this.createaweaponButton.Name = "createaweaponButton";
-            this.createaweaponButton.Size = new System.Drawing.Size(176, 77);
-            this.createaweaponButton.TabIndex = 3;
-            this.createaweaponButton.Text = "Click to Create";
-            this.createaweaponButton.UseVisualStyleBackColor = true;
-            this.createaweaponButton.Click += new System.EventHandler(this.createaweaponButton_Click);
+            this.StoryIntro.Location = new System.Drawing.Point(41, 215);
+            this.StoryIntro.Name = "StoryIntro";
+            this.StoryIntro.Size = new System.Drawing.Size(141, 27);
+            this.StoryIntro.TabIndex = 2;
+            this.StoryIntro.Text = "Story Introduction";
+            // 
+            // StoryTitle
+            // 
+            this.StoryTitle.Location = new System.Drawing.Point(41, 189);
+            this.StoryTitle.Name = "StoryTitle";
+            this.StoryTitle.Size = new System.Drawing.Size(140, 20);
+            this.StoryTitle.TabIndex = 1;
+            this.StoryTitle.Text = "Story Title";
+            this.StoryTitle.TextChanged += new System.EventHandler(this.StoryTitle_TextChanged);
             // 
             // QuestsBox
             // 
@@ -358,21 +409,22 @@ namespace ConsoleApp1
             this.QuestsBox.TabStop = false;
             this.QuestsBox.Text = "Quests";
             // 
-            // TitleBox
+            // addQuest
             // 
-            this.TitleBox.Location = new System.Drawing.Point(14, 20);
-            this.TitleBox.Name = "TitleBox";
-            this.TitleBox.Size = new System.Drawing.Size(53, 20);
-            this.TitleBox.TabIndex = 0;
-            this.TitleBox.Text = "Title";
+            this.addQuest.Location = new System.Drawing.Point(92, 56);
+            this.addQuest.Name = "addQuest";
+            this.addQuest.Size = new System.Drawing.Size(75, 36);
+            this.addQuest.TabIndex = 3;
+            this.addQuest.Text = "Add New Quest";
+            this.addQuest.UseVisualStyleBackColor = true;
+            this.addQuest.Click += new System.EventHandler(this.addQuest_Click);
             // 
-            // ChallengeBox
+            // TargetBox
             // 
-            this.ChallengeBox.Location = new System.Drawing.Point(73, 20);
-            this.ChallengeBox.Name = "ChallengeBox";
-            this.ChallengeBox.Size = new System.Drawing.Size(53, 20);
-            this.ChallengeBox.TabIndex = 0;
-            this.ChallengeBox.Text = "Challenge";
+            this.TargetBox.Location = new System.Drawing.Point(194, 21);
+            this.TargetBox.Name = "TargetBox";
+            this.TargetBox.Size = new System.Drawing.Size(78, 20);
+            this.TargetBox.TabIndex = 2;
             // 
             // VillianBox
             // 
@@ -383,63 +435,46 @@ namespace ConsoleApp1
             this.VillianBox.TabIndex = 1;
             this.VillianBox.Text = "Villian";
             // 
-            // TargetBox
+            // ChallengeBox
             // 
-            this.TargetBox.Location = new System.Drawing.Point(194, 21);
-            this.TargetBox.Name = "TargetBox";
-            this.TargetBox.Size = new System.Drawing.Size(78, 20);
-            this.TargetBox.TabIndex = 2;
+            this.ChallengeBox.Location = new System.Drawing.Point(73, 20);
+            this.ChallengeBox.Name = "ChallengeBox";
+            this.ChallengeBox.Size = new System.Drawing.Size(53, 20);
+            this.ChallengeBox.TabIndex = 0;
+            this.ChallengeBox.Text = "Challenge";
             // 
-            // addQuest
+            // TitleBox
             // 
-            this.addQuest.Location = new System.Drawing.Point(92, 56);
-            this.addQuest.Name = "addQuest";
-            this.addQuest.Size = new System.Drawing.Size(75, 36);
-            this.addQuest.TabIndex = 3;
-            this.addQuest.Text = "Add New Quest";
-            this.addQuest.UseVisualStyleBackColor = true;
+            this.TitleBox.Location = new System.Drawing.Point(14, 20);
+            this.TitleBox.Name = "TitleBox";
+            this.TitleBox.Size = new System.Drawing.Size(53, 20);
+            this.TitleBox.TabIndex = 0;
+            this.TitleBox.Text = "Title";
             // 
-            // StoryTitle
+            // SceneName
             // 
-            this.StoryTitle.Location = new System.Drawing.Point(41, 189);
-            this.StoryTitle.Name = "StoryTitle";
-            this.StoryTitle.Size = new System.Drawing.Size(140, 20);
-            this.StoryTitle.TabIndex = 1;
-            this.StoryTitle.Text = "Story Title";
+            this.SceneName.Location = new System.Drawing.Point(215, 231);
+            this.SceneName.Name = "SceneName";
+            this.SceneName.Size = new System.Drawing.Size(140, 20);
+            this.SceneName.TabIndex = 1;
+            this.SceneName.Text = "Scene Name";
+            this.SceneName.TextChanged += new System.EventHandler(this.StoryTitle_TextChanged);
             // 
-            // StoryIntro
+            // LevelBox
             // 
-            this.StoryIntro.Location = new System.Drawing.Point(41, 215);
-            this.StoryIntro.Name = "StoryIntro";
-            this.StoryIntro.Size = new System.Drawing.Size(141, 27);
-            this.StoryIntro.TabIndex = 2;
-            this.StoryIntro.Text = "Story Introduction";
+            this.LevelBox.Location = new System.Drawing.Point(263, 230);
+            this.LevelBox.Name = "LevelBox";
+            this.LevelBox.Size = new System.Drawing.Size(149, 20);
+            this.LevelBox.TabIndex = 7;
             // 
-            // StoryConclusion
+            // name
             // 
-            this.StoryConclusion.Location = new System.Drawing.Point(41, 248);
-            this.StoryConclusion.Name = "StoryConclusion";
-            this.StoryConclusion.Size = new System.Drawing.Size(141, 27);
-            this.StoryConclusion.TabIndex = 2;
-            this.StoryConclusion.Text = "Story Conclusion";
-            // 
-            // ChooseScene
-            // 
-            this.ChooseScene.FormattingEnabled = true;
-            this.ChooseScene.Location = new System.Drawing.Point(41, 281);
-            this.ChooseScene.Name = "ChooseScene";
-            this.ChooseScene.Size = new System.Drawing.Size(140, 21);
-            this.ChooseScene.TabIndex = 3;
-            this.ChooseScene.Text = "Pick a Scene";
-            // 
-            // CreateScene_btn
-            // 
-            this.CreateScene_btn.Location = new System.Drawing.Point(69, 321);
-            this.CreateScene_btn.Name = "CreateScene_btn";
-            this.CreateScene_btn.Size = new System.Drawing.Size(77, 35);
-            this.CreateScene_btn.TabIndex = 4;
-            this.CreateScene_btn.Text = "Create Scene";
-            this.CreateScene_btn.UseVisualStyleBackColor = true;
+            this.name.AutoSize = true;
+            this.name.Location = new System.Drawing.Point(475, 114);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(33, 13);
+            this.name.TabIndex = 5;
+            this.name.Text = "name";
             // 
             // NarraratorForm
             // 
@@ -460,11 +495,11 @@ namespace ConsoleApp1
             this.tabControl1.ResumeLayout(false);
             this.CreateWeapon.ResumeLayout(false);
             this.CreateWeapon.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.damagePicker)).EndInit();
             this.CreateVillian.ResumeLayout(false);
             this.CreateVillian.PerformLayout();
             this.CreateScene.ResumeLayout(false);
             this.CreateScene.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.damagePicker)).EndInit();
             this.QuestsBox.ResumeLayout(false);
             this.QuestsBox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TargetBox)).EndInit();
@@ -485,18 +520,18 @@ namespace ConsoleApp1
         private System.Windows.Forms.TabPage CreateWeapon;
         private System.Windows.Forms.TabPage CreateVillian;
         private System.Windows.Forms.TabPage CreateScene;
-        private System.Windows.Forms.Label name;
+        private System.Windows.Forms.Label level;
         private System.Windows.Forms.Label maxLife;
         private System.Windows.Forms.Label magic;
         private System.Windows.Forms.Label strength;
         private System.Windows.Forms.Label inteligence;
         private System.Windows.Forms.Label dexterity;
-        private System.Windows.Forms.TextBox textBox6;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox NameBox;
+        private System.Windows.Forms.TextBox MagicBox;
+        private System.Windows.Forms.TextBox MaxLifeBox;
+        private System.Windows.Forms.TextBox StrengthBox;
+        private System.Windows.Forms.TextBox InteligenceBox;
+        private System.Windows.Forms.TextBox DexterityBox;
         private System.Windows.Forms.Button createVillianButton;
         private System.Windows.Forms.Button createaweaponButton;
         private System.Windows.Forms.Label damagePickerLabel;
@@ -513,5 +548,8 @@ namespace ConsoleApp1
         private System.Windows.Forms.ComboBox VillianBox;
         private System.Windows.Forms.TextBox ChallengeBox;
         private System.Windows.Forms.TextBox TitleBox;
+        private System.Windows.Forms.TextBox SceneName;
+        private System.Windows.Forms.TextBox LevelBox;
+        private System.Windows.Forms.Label name;
     }
 }

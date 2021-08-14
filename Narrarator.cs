@@ -32,7 +32,7 @@ namespace ConsoleApp1
         public bool QuestEnded { get; set; } = true;
         public int Progress { get; set; } = 0;
 
-        public void createHero(string name, string gender, int age, string heroType)
+        public Character createHero(string name, string gender, int age, string heroType)
         {
             if (heroType == "ogre")
             {
@@ -50,6 +50,7 @@ namespace ConsoleApp1
             {
                 hero = new GodH("prince", "omnipotent", 9000);
             }
+            return hero;
         }
 
         public void createHero()
@@ -177,6 +178,30 @@ namespace ConsoleApp1
                 return null;
             }
         }
+
+        public Character createVillian(string vil)
+        {
+            if (vil == "Kod")
+            {
+                return new Kod(1, new Skill(2, 8, 670, 4), 240);
+            }
+            else if (vil == "Mega Wolf")
+            {
+                return new MegaWolf(1, new Skill(3, 3, 200, 4), 403);
+            }
+            else if (vil == "King Piller")
+            {
+                return new KingPiller(1, new Skill(2, 4, 101, 6), 250);
+            }
+            else if (vil == "Dark Elf")
+            {
+                return new DarkElf(1, new Skill(5, 6, 109, 5), 100);
+            }
+            else
+            {
+                return null;
+            }
+        }
         public Quests.QuestBase newQuest(string title, string challenge, int targets, Character enemy = null)
         {
             return new Quests.QuestBase(title, challenge, targets, enemy);
@@ -249,13 +274,14 @@ namespace ConsoleApp1
             return null;
         }
 
-        public void move()
+        public void move(Action action)
         {
             Random moveDice = new Random();
             int result = moveDice.Next(2);
             if (result == 0)
             {
                 //TODO: NOtify about drop
+                action.Invoke();
                 weaponBag.Add(GetSceneWeapon());
             }
             else
