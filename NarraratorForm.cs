@@ -7,22 +7,23 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ConsoleApp1;
 
-namespace ConsoleApp1
+namespace rpgForms
 {
     public partial class NarraratorForm : Form
     {
         private Narrarator narrarator;
-        public List<Quests.QuestBase> quests;
-        public List<Scenery.SceneryBase> scenes;
+        public List<ConsoleApp1.Quests.QuestBase> quests;
+        public List<ConsoleApp1.Scenery.SceneryBase> scenes;
         public List<Weapons> weapons;
         public List<Character> characters;
         public NarraratorForm()
         {
             InitializeComponent();
             narrarator = new Narrarator();
-            quests = new List<Quests.QuestBase>();
-            scenes = new List<Scenery.SceneryBase>();
+            quests = new List<ConsoleApp1.Quests.QuestBase>();
+            scenes = new List<ConsoleApp1.Scenery.SceneryBase>();
             weapons = new List<Weapons>();
             characters = new List<Character>();
         }
@@ -48,7 +49,7 @@ namespace ConsoleApp1
 
         private void addQuest_Click(object sender, EventArgs e)
         {
-            var quest = new Quests.QuestBase(TitleBox.Text, ChallengeBox.Text, Convert.ToInt32((TargetBox.Value)), narrarator.createVillian(VillianBox.SelectedItem.ToString()));
+            var quest = new ConsoleApp1.Quests.QuestBase(TitleBox.Text, ChallengeBox.Text, Convert.ToInt32((TargetBox.Value)), narrarator.createVillian(VillianBox.SelectedItem.ToString()));
             quests.Add(quest);
         }
 
@@ -56,7 +57,7 @@ namespace ConsoleApp1
         {
             var story = narrarator.newStory(StoryTitle.Text, quests, StoryIntro.Text, StoryConclusion.Text);
             var scene = narrarator.newScene(SceneName.Text, story, ChooseScene.SelectedItem.ToString());
-            scenes.Add(scene);
+            narrarator.scenes.Add(scene);
             quests.Clear();
         }
 
@@ -70,5 +71,7 @@ namespace ConsoleApp1
             var villian = narrarator.createVillian(Convert.ToInt32(LevelBox.Text), Convert.ToInt32(DexterityBox.Text), Convert.ToInt32(InteligenceBox.Text),Convert.ToInt32(StrengthBox.Text), Convert.ToInt32(MagicBox.Text), Convert.ToInt32(MaxLifeBox.Text), NameBox.Text);
             characters.Add(villian);
         }
+
+       
     }
 }

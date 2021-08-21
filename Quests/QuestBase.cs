@@ -12,6 +12,7 @@ namespace ConsoleApp1.Quests
         private string challenge;
         private int target;
         private Character enemy;
+        public int ID { get; set; }
         public string Title { get { return title; } }
         public string Challenge { get { return challenge; } }
         public int Target { get { return target; } }
@@ -25,23 +26,20 @@ namespace ConsoleApp1.Quests
             this.target = target;
             this.enemy = enemy;
         }
-        public static bool operator !=(QuestBase a, QuestBase b)
-        {
-            if (a == null || b == null)
-            {
-                return true;
-            }
-            return a.Title != b.Title;
-        }
 
-        public static bool operator ==(QuestBase a, QuestBase b)
+        public override bool Equals(object obj)
         {
-            if (a == null || b == null)
+            if (obj.GetType() == this.GetType())
+            {
+                return ((QuestBase)obj).ID == this.ID;
+            }
+            else
             {
                 return false;
             }
-            return a.Title == b.Title;
+
         }
 
+       
     }
 }

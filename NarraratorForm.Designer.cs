@@ -1,5 +1,5 @@
 ﻿
-namespace ConsoleApp1
+namespace rpgForms
 {
     partial class NarraratorForm
     {
@@ -45,10 +45,12 @@ namespace ConsoleApp1
             this.createVillianButton = new System.Windows.Forms.Button();
             this.NameBox = new System.Windows.Forms.TextBox();
             this.MagicBox = new System.Windows.Forms.TextBox();
+            this.LevelBox = new System.Windows.Forms.TextBox();
             this.MaxLifeBox = new System.Windows.Forms.TextBox();
             this.StrengthBox = new System.Windows.Forms.TextBox();
             this.InteligenceBox = new System.Windows.Forms.TextBox();
             this.DexterityBox = new System.Windows.Forms.TextBox();
+            this.name = new System.Windows.Forms.Label();
             this.level = new System.Windows.Forms.Label();
             this.maxLife = new System.Windows.Forms.Label();
             this.magic = new System.Windows.Forms.Label();
@@ -60,6 +62,7 @@ namespace ConsoleApp1
             this.ChooseScene = new System.Windows.Forms.ComboBox();
             this.StoryConclusion = new System.Windows.Forms.RichTextBox();
             this.StoryIntro = new System.Windows.Forms.RichTextBox();
+            this.SceneName = new System.Windows.Forms.TextBox();
             this.StoryTitle = new System.Windows.Forms.TextBox();
             this.QuestsBox = new System.Windows.Forms.GroupBox();
             this.addQuest = new System.Windows.Forms.Button();
@@ -67,9 +70,8 @@ namespace ConsoleApp1
             this.VillianBox = new System.Windows.Forms.ComboBox();
             this.ChallengeBox = new System.Windows.Forms.TextBox();
             this.TitleBox = new System.Windows.Forms.TextBox();
-            this.SceneName = new System.Windows.Forms.TextBox();
-            this.LevelBox = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.Label();
+            this.saveConfig = new System.Windows.Forms.Button();
+            this.startGame = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.CreateWeapon.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.damagePicker)).BeginInit();
@@ -253,6 +255,13 @@ namespace ConsoleApp1
             this.MagicBox.Size = new System.Drawing.Size(149, 20);
             this.MagicBox.TabIndex = 7;
             // 
+            // LevelBox
+            // 
+            this.LevelBox.Location = new System.Drawing.Point(263, 230);
+            this.LevelBox.Name = "LevelBox";
+            this.LevelBox.Size = new System.Drawing.Size(149, 20);
+            this.LevelBox.TabIndex = 7;
+            // 
             // MaxLifeBox
             // 
             this.MaxLifeBox.Location = new System.Drawing.Point(107, 130);
@@ -280,6 +289,15 @@ namespace ConsoleApp1
             this.DexterityBox.Name = "DexterityBox";
             this.DexterityBox.Size = new System.Drawing.Size(149, 20);
             this.DexterityBox.TabIndex = 7;
+            // 
+            // name
+            // 
+            this.name.AutoSize = true;
+            this.name.Location = new System.Drawing.Point(475, 114);
+            this.name.Name = "name";
+            this.name.Size = new System.Drawing.Size(33, 13);
+            this.name.TabIndex = 5;
+            this.name.Text = "name";
             // 
             // level
             // 
@@ -386,6 +404,15 @@ namespace ConsoleApp1
             this.StoryIntro.TabIndex = 2;
             this.StoryIntro.Text = "Story Introduction";
             // 
+            // SceneName
+            // 
+            this.SceneName.Location = new System.Drawing.Point(215, 231);
+            this.SceneName.Name = "SceneName";
+            this.SceneName.Size = new System.Drawing.Size(140, 20);
+            this.SceneName.TabIndex = 1;
+            this.SceneName.Text = "Scene Name";
+            this.SceneName.TextChanged += new System.EventHandler(this.StoryTitle_TextChanged);
+            // 
             // StoryTitle
             // 
             this.StoryTitle.Location = new System.Drawing.Point(41, 189);
@@ -451,30 +478,26 @@ namespace ConsoleApp1
             this.TitleBox.TabIndex = 0;
             this.TitleBox.Text = "Title";
             // 
-            // SceneName
+            // saveConfig
             // 
-            this.SceneName.Location = new System.Drawing.Point(215, 231);
-            this.SceneName.Name = "SceneName";
-            this.SceneName.Size = new System.Drawing.Size(140, 20);
-            this.SceneName.TabIndex = 1;
-            this.SceneName.Text = "Scene Name";
-            this.SceneName.TextChanged += new System.EventHandler(this.StoryTitle_TextChanged);
+            this.saveConfig.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 18F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.saveConfig.Location = new System.Drawing.Point(51, 389);
+            this.saveConfig.Name = "saveConfig";
+            this.saveConfig.Size = new System.Drawing.Size(175, 129);
+            this.saveConfig.TabIndex = 3;
+            this.saveConfig.Text = "Save Configuration";
+            this.saveConfig.UseVisualStyleBackColor = true;
             // 
-            // LevelBox
+            // startGame
             // 
-            this.LevelBox.Location = new System.Drawing.Point(263, 230);
-            this.LevelBox.Name = "LevelBox";
-            this.LevelBox.Size = new System.Drawing.Size(149, 20);
-            this.LevelBox.TabIndex = 7;
-            // 
-            // name
-            // 
-            this.name.AutoSize = true;
-            this.name.Location = new System.Drawing.Point(475, 114);
-            this.name.Name = "name";
-            this.name.Size = new System.Drawing.Size(33, 13);
-            this.name.TabIndex = 5;
-            this.name.Text = "name";
+            this.startGame.Font = new System.Drawing.Font("Yu Gothic UI Semibold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.startGame.Location = new System.Drawing.Point(272, 389);
+            this.startGame.Name = "startGame";
+            this.startGame.Size = new System.Drawing.Size(174, 129);
+            this.startGame.TabIndex = 3;
+            this.startGame.Text = "Start Game";
+            this.startGame.UseVisualStyleBackColor = true;
+
             // 
             // NarraratorForm
             // 
@@ -482,6 +505,8 @@ namespace ConsoleApp1
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1350, 619);
+            this.Controls.Add(this.startGame);
+            this.Controls.Add(this.saveConfig);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.weaponsLabel);
             this.Controls.Add(this.characterLabel);
@@ -551,5 +576,7 @@ namespace ConsoleApp1
         private System.Windows.Forms.TextBox SceneName;
         private System.Windows.Forms.TextBox LevelBox;
         private System.Windows.Forms.Label name;
+        private System.Windows.Forms.Button saveConfig;
+        private System.Windows.Forms.Button startGame;
     }
 }

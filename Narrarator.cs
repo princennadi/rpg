@@ -20,7 +20,10 @@ namespace ConsoleApp1
     {
         private Character hero;
         private IList<Character> enemy;
+        private List<SceneryBase> _scenes = new List<SceneryBase>();
+        public List<SceneryBase> scenes { get { return _scenes; } }
         private List<Weapons> weaponBag = new List<Weapons>();
+        public List<Character> villians { get; set; } 
         public Character Hero
         {
             get { return hero; }
@@ -28,9 +31,10 @@ namespace ConsoleApp1
         }
         public SceneryBase Scenery { get; set; } = null;
         public Quests.QuestBase Quest { get; set; } = null;
-        public bool StoryEnded {get; set;} = true;
-        public bool QuestEnded { get; set; } = true;
+        public bool StoryEnded {get; set;} = false;
+        public bool QuestEnded { get; set; } = false;
         public int Progress { get; set; } = 0;
+        public List<Weapons> WeaponBag { get { return weaponBag; } }
 
         public Character createHero(string name, string gender, int age, string heroType)
         {
@@ -42,7 +46,7 @@ namespace ConsoleApp1
             {
                 hero = new SorcererH(name, gender, age);
             }
-            else if (heroType == "ogre")
+            else if (heroType == "elf")
             {
                 hero = new ElfH(name, gender, age);
             }
@@ -214,7 +218,7 @@ namespace ConsoleApp1
 
         public Scenery.SceneryBase newScene(string scenename, Stories.StoryBase story, string sceneType)
         {
-            if (sceneType == "forest")
+            if (sceneType == "Forest")
             {
                 return new Scenery.Forest(scenename, story);
             }
@@ -228,15 +232,24 @@ namespace ConsoleApp1
         {
             Scenery = scenery;
             StoryEnded = false;
-            return scenery.Story.Introduction;
+            return Scenery.Story.Introduction;
         }
 
         public string NextQuest()
         {
-           
+            Quests.QuestBase current;
+
+
             if (Scenery != null)
             {
-                Quests.QuestBase current = Scenery.Story.Challenge.FirstOrDefault(x => x != Quest);
+                if (Quest == null)
+                {
+                    current = Scenery.Story.Challenge[0];
+                }
+                else
+                {
+                    current = Scenery.Story.Challenge.FirstOrDefault(x => x.ID != Quest.ID);
+                }
 
                 if (current != null)
                 {
@@ -274,19 +287,19 @@ namespace ConsoleApp1
             return null;
         }
 
-        public void move(Action action)
+        public void move(Action<object> action)
         {
             Random moveDice = new Random();
             int result = moveDice.Next(2);
             if (result == 0)
             {
                 //TODO: NOtify about drop
-                action.Invoke();
+                action.Invoke("New Weapon Dropped");
                 weaponBag.Add(GetSceneWeapon());
             }
             else
             {
-                enemy = generateEnemy();
+               // enemy = generateEnemy();
             }
         }
 
