@@ -16,6 +16,7 @@ namespace ConsoleApp1
         Miss,
         SelfDamage,
     }
+    [Serializable]
     public class Narrarator
     {
         private Character hero;
@@ -23,6 +24,7 @@ namespace ConsoleApp1
         private List<SceneryBase> _scenes = new List<SceneryBase>();
         public List<SceneryBase> scenes { get { return _scenes; } }
         private List<Weapons> weaponBag = new List<Weapons>();
+        public List<Weapons> Weapons { get; set; }
         public List<Character> villians { get; set; } 
         public Character Hero
         {
@@ -206,6 +208,11 @@ namespace ConsoleApp1
                 return null;
             }
         }
+
+        public Character lom()
+        {
+            return null;
+        }
         public Quests.QuestBase newQuest(string title, string challenge, int targets, Character enemy = null)
         {
             return new Quests.QuestBase(title, challenge, targets, enemy);
@@ -314,11 +321,11 @@ namespace ConsoleApp1
                 case 1:
                 case 2:
                 case 3:
-                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                    enemies.Add(spawnEnemy(spawner, level));
                     break;
                 case 4:
                 case 5:
-                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                    enemies.Add(spawnEnemy(spawner, level));
                     enemies.Add(new Tree());
                     break;
                 default:
@@ -335,24 +342,67 @@ namespace ConsoleApp1
                 int count = Convert.ToInt32(Math.Ceiling(level / 2.0));
                 for (int i = 0; i < count; i++)
                 {
-                    enemies.Add(spawnEnemy(spawner.Next(4), level));
+                    enemies.Add(spawnEnemy(spawner, level));
                 }
             }
             return enemies;
         }
-
-        public Character spawnEnemy(int type, int lev)
+        
+        public long getRandomHealth(int level)
         {
+            Random picker = new Random();
+            switch (level)
+            {
+                case 1:
+                case 2:
+                case 3:
+                case 4:
+                case 5:
+                    return picker.Next(1000);
+                case 6:
+                case 7:
+                case 8:
+                case 9:
+                case 10:
+                    return picker.Next(2000);
+                default:
+                    return picker.Next(2500 + level);
+            }
+        }
+
+        public Character spawnEnemy(Random random, string villian)
+        {
+            var kods = villians.Where(v => v.getName == villian).ToList();
+            if (kods.Count == 0)
+            {
+                return new Tree();
+            }
+            else
+            {
+                return kods[random.Next(kods.Count)];
+            }
+        }
+
+        public Character spawnEnemy(Random random, int lev)
+        {
+            int type = random.Next(4);
+            Character spawnendemy;
             switch (type)
             {
                 case 1:
+                    spawnendemy = spawnEnemy(random, "Kod");
+                    spawnendemy.setMaxHealth(getRandomHealth(lev));
                     return new Kod(lev / 2, new Skill(100, 25, 10, 50));
                 case 2:
+                    spawnendemy = spawnEnemy(random, "Mega Wolf");
+                    spawnendemy.setMaxHealth(getRandomHealth(lev));
                     return new MegaWolf(lev / 2, new Skill(20, 100, 50, 25));
                 case 3:
+                    spawnendemy = spawnEnemy(random, "Dark Elf");
+                    spawnendemy.setMaxHealth(getRandomHealth(lev));
                     return new DarkElf(lev / 2, new Skill(100, 35, 12, 70));
                 default:
-                    return new Kod(lev / 2, new Skill(100, 25, 10, 50));
+                    return spawnEnemy(random, "Tree");
             }
         }
         public string EndStory()

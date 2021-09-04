@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    [Serializable]
     public abstract class Weapons
     {
         private string name;

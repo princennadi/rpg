@@ -44,6 +44,7 @@ namespace rpgForms
            
            weapon = narrarator.createWeapon(type, damage);
             weapons.Add(weapon);
+            updateLists();
         }
         
 
@@ -59,6 +60,7 @@ namespace rpgForms
             var scene = narrarator.newScene(SceneName.Text, story, ChooseScene.SelectedItem.ToString());
             narrarator.scenes.Add(scene);
             quests.Clear();
+            updateLists();
         }
 
         private void StoryTitle_TextChanged(object sender, EventArgs e)
@@ -70,8 +72,29 @@ namespace rpgForms
         {
             var villian = narrarator.createVillian(Convert.ToInt32(LevelBox.Text), Convert.ToInt32(DexterityBox.Text), Convert.ToInt32(InteligenceBox.Text),Convert.ToInt32(StrengthBox.Text), Convert.ToInt32(MagicBox.Text), Convert.ToInt32(MaxLifeBox.Text), NameBox.Text);
             characters.Add(villian);
+            updateLists();
         }
 
-       
+        private void updateLists()
+        {
+            Weapons.Items.Clear();
+            Scene.Items.Clear();
+            Character.Items.Clear();
+            foreach (var item in weapons)
+            {
+                Weapons.Items.Add(new ListViewItem(item.ToString()));
+            }
+            foreach (var item in scenes)
+            {
+                Scene.Items.Add(new ListViewItem(item.ToString()));
+            }
+            foreach (var item in characters)
+            {
+                Character.Items.Add(new ListViewItem(item.ToString()));
+            }
+        }
+        private void startGame_Click(object sender, EventArgs e)
+        {
+        }
     }
 }

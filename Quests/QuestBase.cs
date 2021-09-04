@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Quests
 {
+    [Serializable]
     public class QuestBase
     {
         private string title;

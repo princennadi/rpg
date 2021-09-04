@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Stories
 {
+    [Serializable]
     public  class StoryBase
     {
         private string title;

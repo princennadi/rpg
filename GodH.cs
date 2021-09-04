@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    [Serializable]
     class GodH:Character
     {
         public GodH(string name, string gender, int age) : base(name, gender, 1, age, 500, new Skill(100, 100, 100, 100))

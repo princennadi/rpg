@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Scenery
 {
+    [Serializable]
     public abstract class SceneryBase
     {
         private string name;
@@ -42,6 +43,10 @@ namespace ConsoleApp1.Scenery
 
         }
 
+        public override string ToString()
+        {
+            return this.name;
+        }
         public override int GetHashCode()
         {
             return base.GetHashCode();

@@ -497,7 +497,7 @@ namespace rpgForms
             this.startGame.TabIndex = 3;
             this.startGame.Text = "Start Game";
             this.startGame.UseVisualStyleBackColor = true;
-
+            this.startGame.Click += new System.EventHandler(this.startGame_Click);
             // 
             // NarraratorForm
             // 

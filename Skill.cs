@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-   public class Skill
+    [Serializable]
+    public class Skill
     { 
         
         private int intelligence = 5;

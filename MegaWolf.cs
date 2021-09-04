@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
+    [Serializable]
     public class MegaWolf : Character
     {
         public MegaWolf(int level, Skill skill, int maxHealth = 500) : base("Mega Wolf", "male" ,level, 132, 500, skill)

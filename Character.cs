@@ -17,7 +17,7 @@ namespace ConsoleApp1
         active,
         passive,
     }
-
+    [Serializable]
     public abstract class Character
     {
         private string name;
@@ -145,6 +145,11 @@ namespace ConsoleApp1
             this.skill.loseSpeed(2);
         }
 
+        public void setMaxHealth(long health)
+        {
+            this.maxHealth = health;
+            this.life = this.life > health ? health : life;
+        }
         public override string ToString()
         {
             return name;
